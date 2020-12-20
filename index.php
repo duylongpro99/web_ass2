@@ -1,11 +1,11 @@
 <?php
-  require("./common/common.php");
+require("./common/common.php");
 ?>
 
 <!-- Header -->
 <?php
-    include('./common/intro.php');
-    include('./common/header.php');
+include('./common/intro.php');
+include('./common/header.php');
 ?>
 
 <!-- Content -->
@@ -82,5 +82,5 @@
 </div>
 <!-- Footer -->
 <?php
-    include('./common/footer.php');
+include('./common/footer.php');
 ?>
