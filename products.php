@@ -5,6 +5,27 @@
     include('./common/header.php');
     ?>
  <!-- body -->
+ <?php
+
+    //This code checks if the product is added to cart. 
+    function check_if_added_to_cart($item_id)
+    {
+        $user_id = $_SESSION['user_id']; //We'll get the user_id from the session
+        // require("./common/common.php"); // connecting to the database
+        // We will select all the entries from the user_items table where the item_id is equal to the item_id we passed to this function, user_id is equal to the user_id in the session and status is 'Added to cart'
+        require("./common/common.php"); // connecting to the database
+        $query = "SELECT * FROM users_items WHERE item_id='$item_id' AND user_id ='$user_id' and status='Added to cart'";
+        $result = mysqli_query($con, $query) or die(mysqli_error($con));
+
+        // We'll check if the no.of rows in the result and no.of rows returned by the mysqli_num_rows($result) is true. If yes then it return 0 else it returns 0
+        if (mysqli_num_rows($result) >= 1) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    ?>
  <br>
  <br>
 
@@ -57,8 +78,23 @@
                                          <h2><?php echo htmlspecialchars($row["name"]); ?></h2>
                                          <p>Price: <?php echo htmlspecialchars($row["price"]); ?> </p>
 
-                                         <p><a href="#" data-toggle="modal" data-target="#loginmodal" role="button"
-                                                 class="btn btn-primary btn-block btn-sm">Buy Now</a></p>
+                                         <?php if (!isset($_SESSION['email'])) { ?>
+                                         <p><a href="login.php" role="button" class="btn btn-primary btn-block">Buy
+                                                 Now</a></p>
+                                         <?php
+                                                    } else {
+                                                        //We have created a function to check whether this particular product is added to cart or not.
+                                                        if (check_if_added_to_cart($row["id"])) { //This is same as if(check_if_added_to_cart != 0)
+                                                            echo '<a href="#" class="btn btn-block btn-success" disabled>Added to
+                                             cart</a>';
+                                                        } else {
+                                                        ?>
+                                         <a href="cart-add.php?id=<?php echo htmlspecialchars($row["id"]); ?>"
+                                             name="add" value="add" class="btn btn-block btn-primary">Add to cart</a>
+                                         <?php
+                                                        }
+                                                    }
+                                                    ?>
                                      </div>
                                  </div>
                              </div>
@@ -92,8 +128,23 @@
                                          <h3><?php echo htmlspecialchars($row["name"]); ?></h3>
                                          <p>Price: <?php echo htmlspecialchars($row["price"]); ?> </p>
 
-                                         <p><a href="#" data-toggle="modal" data-target="#loginmodal" role="button"
-                                                 class="btn btn-primary btn-block btn-sm">Buy Now</a></p>
+                                         <?php if (!isset($_SESSION['email'])) { ?>
+                                         <p><a href="login.php" role="button" class="btn btn-primary btn-block">Buy
+                                                 Now</a></p>
+                                         <?php
+                                                    } else {
+                                                        //We have created a function to check whether this particular product is added to cart or not.
+                                                        if (check_if_added_to_cart($row["id"])) { //This is same as if(check_if_added_to_cart != 0)
+                                                            echo '<a href="#" class="btn btn-block btn-success" disabled>Added to
+                                             cart</a>';
+                                                        } else {
+                                                        ?>
+                                         <a href="cart-add.php?id=<?php echo htmlspecialchars($row["id"]); ?>"
+                                             name="add" value="add" class="btn btn-block btn-primary">Add to cart</a>
+                                         <?php
+                                                        }
+                                                    }
+                                                    ?>
                                      </div>
                                  </div>
                              </div>
@@ -127,8 +178,23 @@
                                          <h2><?php echo htmlspecialchars($row["name"]); ?></h2>
                                          <p>Price: <?php echo htmlspecialchars($row["price"]); ?> </p>
 
-                                         <p><a href="#" data-toggle="modal" data-target="#loginmodal" role="button"
-                                                 class="btn btn-primary btn-block btn-sm">Buy Now</a></p>
+                                         <?php if (!isset($_SESSION['email'])) { ?>
+                                         <p><a href="login.php" role="button" class="btn btn-primary btn-block">Buy
+                                                 Now</a></p>
+                                         <?php
+                                                    } else {
+                                                        //We have created a function to check whether this particular product is added to cart or not.
+                                                        if (check_if_added_to_cart($row["id"])) { //This is same as if(check_if_added_to_cart != 0)
+                                                            echo '<a href="#" class="btn btn-block btn-success" disabled>Added to
+                                             cart</a>';
+                                                        } else {
+                                                        ?>
+                                         <a href="cart-add.php?id=<?php echo htmlspecialchars($row["id"]); ?>"
+                                             name="add" value="add" class="btn btn-block btn-primary">Add to cart</a>
+                                         <?php
+                                                        }
+                                                    }
+                                                    ?>
                                      </div>
                                  </div>
                              </div>
@@ -162,8 +228,23 @@
                                          <h2><?php echo htmlspecialchars($row["name"]); ?></h2>
                                          <p>Price: <?php echo htmlspecialchars($row["price"]); ?> </p>
 
-                                         <p><a href="#" data-toggle="modal" data-target="#loginmodal" role="button"
-                                                 class="btn btn-primary btn-block btn-sm">Buy Now</a></p>
+                                         <?php if (!isset($_SESSION['email'])) { ?>
+                                         <p><a href="login.php" role="button" class="btn btn-primary btn-block">Buy
+                                                 Now</a></p>
+                                         <?php
+                                                    } else {
+                                                        //We have created a function to check whether this particular product is added to cart or not.
+                                                        if (check_if_added_to_cart($row["id"])) { //This is same as if(check_if_added_to_cart != 0)
+                                                            echo '<a href="#" class="btn btn-block btn-success" disabled>Added to
+                                             cart</a>';
+                                                        } else {
+                                                        ?>
+                                         <a href="cart-add.php?id=<?php echo htmlspecialchars($row["id"]); ?>"
+                                             name="add" value="add" class="btn btn-block btn-primary">Add to cart</a>
+                                         <?php
+                                                        }
+                                                    }
+                                                    ?>
                                      </div>
                                  </div>
                              </div>
