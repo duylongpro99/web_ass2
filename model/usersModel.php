@@ -1,5 +1,5 @@
 <?php
-class Users{
+class usersModel{
     function __construct($consetup)
     {
         $this->host = $consetup->host;
@@ -11,7 +11,7 @@ class Users{
     // open mysql data base
     public function open_db()
     {
-        $this->condb = mysqli_connect( $this->host, $this->user, $this->pass, $this->db);
+        $this->condb = new mysqli( $this->host, $this->user, $this->pass, $this->db);
         if ($this->condb->connect_error) 
         {
             die("Erron in connection: " . $this->condb->connect_error);
@@ -30,14 +30,15 @@ class Users{
         try
         {	
             $this->open_db();
-            $query=$this->condb->prepare("INSERT INTO users (id, [address], city, contact, email, [name], [password]) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $query->bind_param("issssss",$obj->id,$obj->address,$obj->city,$obj->contact,$obj->email,$obj->name,$obj->password);
+            $query=$this -> condb -> prepare("INSERT INTO users(id,address, city, contact, email, name, password) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $query->bind_param('issssss',$obj->id, $obj->address,$obj->city,$obj->contact,$obj->email,$obj->name,$obj->password);
             $query->execute();
             $res= $query->get_result();
             $last_id=$this->condb->insert_id;
             $query->close();
             $this->close_db();
             return $last_id;
+
         }
         catch (Exception $e) 
         {

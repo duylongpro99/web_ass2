@@ -1,11 +1,11 @@
 <?php
-  require("./common/common.php");
+require("./common/common.php");
 ?>
 
 <!-- Header -->
 <?php
-    include('./common/intro.php');
-    include('./common/header.php');
+include('./common/intro.php');
+include('./common/header.php');
 ?>
 
 <!-- Content -->
@@ -19,7 +19,7 @@
                 </h4>
                 <br />
                 <br />
-                <a href="products.html" class="btn btn-danger btn-lg active">Shop Now</a>
+                <a href="products.php" class="btn btn-danger btn-lg active">Shop Now</a>
             </div>
         </div>
     </div>
@@ -36,41 +36,50 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col col-sm-3">
-                        <a href="products.html#apple">
+                        <a href="products.php#iphone">
                             <div class="thumbnail">
-                                <img class="w-100 h-100" src="./img/ipnone7plus.png" alt="galaxy note 8 plus">
+                                <img class="w-100 h-100"
+                                    src="https://cdn.tgdd.vn/Products/Images/42/225380/TimerThumb/iphone-12-mini.jpg"
+                                    alt="ip 12 mini">
                                 <div class="caption">
-                                    <h4>Apple</h4>
+                                    <h4>Iphone</h4>
                                 </div>
                             </div>
                         </a>
                     </div>
                     <div class="col col-sm-3">
-                        <a href="products.html#samsung">
+                        <a href="products.php#macbook">
                             <div class="thumbnail">
-                                <img class="w-100 h-100" src="./img/samsungnote8plus.png" alt="galaxy note 8 plus">
+                                <img class="w-100 h-100" style="padding-bottom: 82px"
+                                    src="https://cdn.tgdd.vn/Products/Images/44/220174/apple-macbook-air-2020-i3-220174-1-600x600.jpg"
+                                    alt="mac air">
+
+                            </div>
+                            <div class="caption">
+                                <h4>Macbook</h4>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col col-sm-3">
+                        <a href="products.php#watch">
+                            <div class="thumbnail">
+                                <img class="w-100 h-100"
+                                    src="https://cdn.tgdd.vn/Products/Images/7077/229033/apple-watch-s6-lte-40mm-vien-nhom-day-cao-su-ava-600x600.jpg"
+                                    alt="watch s6">
                                 <div class="caption">
-                                    <h4>Samsung</h4>
+                                    <h4>Watch</h4>
                                 </div>
                             </div>
                         </a>
                     </div>
                     <div class="col col-sm-3">
-                        <a href="products.html#oneplus">
+                        <a href="products.php#mac">
                             <div class="thumbnail">
-                                <img class="w-100 h-100" src="./img/op5t.png" alt="oneplus">
+                                <img class="w-100 h-100"
+                                    src="https://cdn.tgdd.vn/Products/Images/5698/228850/apple-mac-mini-i3-mxnf2saa-600x600.jpg"
+                                    alt="mac mini">
                                 <div class="caption">
-                                    <h4>OnePlus</h4>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col col-sm-3">
-                        <a href="products.html#xiaomi">
-                            <div class="thumbnail">
-                                <img class="w-100 h-100" src="./img/mimix2.png" alt="mi mix 2">
-                                <div class="caption">
-                                    <h4>Xioami</h4>
+                                    <h4>Mac</h4>
                                 </div>
                             </div>
                         </a>
@@ -82,5 +91,5 @@
 </div>
 <!-- Footer -->
 <?php
-    include('./common/footer.php');
+include('./common/footer.php');
 ?>
