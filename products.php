@@ -85,7 +85,7 @@
                                                     } else {
                                                         //We have created a function to check whether this particular product is added to cart or not.
                                                         if (check_if_added_to_cart($row["id"])) { //This is same as if(check_if_added_to_cart != 0)
-                                                            echo '<a href="#" class="btn btn-block btn-success" disabled>Added to
+                                                            echo '<a href="#" class="btn btn-block btn-secondary" disabled>Added to
                                              cart</a>';
                                                         } else {
                                                         ?>
