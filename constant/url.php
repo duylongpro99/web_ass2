@@ -1,2 +1,2 @@
 <?php
-$url = 'Location:http://localhost/webprogramming/ASS2/';
+$url = 'Location:http://localhost/dashboard/www/assignment/';
