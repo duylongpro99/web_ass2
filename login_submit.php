@@ -1,6 +1,7 @@
 <?php
 session_unset();
 require_once './controller/userController.php';
+require_once './constant/url.php';
 require './common/userObj.php';
 require './model/response/checkLoginResponse.php';
 $userController = new usersController();
@@ -14,7 +15,7 @@ $data = $userController->checkInLogin($checkUser);
 if($data != null){
   $loginResponse = new checkLoginResponse($data["userId"], $data["userName"], $data["roleName"], $data["roleId"], $data["password"], $data["email"]
           , $data["contact"], $data["city"],$data["address"]);
-  echo $loginResponse->roleName;
+  header($url.'index.php');
 }
 else{
   echo "<script>alert('Login failed!!!')</script>";
