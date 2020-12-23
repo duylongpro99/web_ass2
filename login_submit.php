@@ -9,15 +9,24 @@ $userController = new usersController();
 
 $email = $_POST['e-mail'];
 $password = $_POST['password'];
-$checkUser  = new userObj(0, '', $password, '', $email,'' ,'' );
+$checkUser  = new userObj(0, '', $password, '', $email, '', '');
 $data = $userController->checkInLogin($checkUser);
 
-if($data != null){
-  $loginResponse = new checkLoginResponse($data["userId"], $data["userName"], $data["roleName"], $data["roleId"], $data["password"], $data["email"]
-          , $data["contact"], $data["city"],$data["address"]);
-  header($url.'index.php');
-}
-else{
+if ($data != null) {
+  $loginResponse = new checkLoginResponse(
+    $data["userId"],
+    $data["userName"],
+    $data["roleName"],
+    $data["roleId"],
+    $data["password"],
+    $data["email"],
+    $data["contact"],
+    $data["city"],
+    $data["address"]
+  );
+  $_SESSION['email'] = $email;
+  $_SESSION['roleName'] = $loginResponse->roleName;
+  header($url . 'index.php');
+} else {
   echo "<script>alert('Login failed!!!')</script>";
 }
-?>
