@@ -1,5 +1,5 @@
 <?php
-    class rolesModel{
+    class userrolesModel{
 
         function __construct($consetup)
 		{
@@ -31,8 +31,8 @@
 			try
 			{	
 				$this->open_db();
-				$query=$this->condb->prepare("INSERT INTO userroles (roleId, userId) VALUES (?, ?)");
-				$query->bind_param("ii",$obj->roleId,$obj->userId);
+				$query=$this->condb->prepare("INSERT INTO userroles (id, roleId, userId) VALUES (?, ?, ?)");
+				$query->bind_param("iii",$obj->id,$obj->roleId,$obj->userId);
 				$query->execute();
 				$res= $query->get_result();
 				$last_id=$this->condb->insert_id;
@@ -111,6 +111,23 @@
 				throw $e; 	
 			}
 			
+		}
+
+		public function getMaxIndex(){
+			try{
+				$this->open_db();
+				$query=$this->condb->prepare("SELECT MAX(id) AS maxId FROM userroles");
+				$query->execute();
+				$res=$query->get_result();
+				$rowData = mysqli_fetch_array($res);	
+				$query->close();				
+				$this->close_db();                
+				return $rowData['maxId'];
+			}
+			catch(Exception $e){
+				$this->close_db();
+				throw $e;
+			}
 		}
     }
 ?>

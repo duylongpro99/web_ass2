@@ -1,17 +1,17 @@
 <?php
-    require 'model/usersModel.php';
-    require 'model/users.php';
+    require_once 'model/userrolesModel.php';
+    require 'model/userroles.php';
     require_once './config.php';
 
     session_status() === PHP_SESSION_ACTIVE ? TRUE : session_start();
     
-	class usersController 
+	class userrolesController 
 	{
 
  		function __construct() 
 		{          
 			$this->objconfig = new config();
-            $this->objum =  new usersModel($this->objconfig);
+			$this->objurm =  new userrolesModel($this->objconfig);
 		}
         // mvc handler request
 		// public function mvcHandler() 
@@ -39,8 +39,7 @@
 		}	
         // check validation
 		public function checkValidation($user)
-        {    
-            $noerror=true;
+        {    $noerror=true;
             // Validate category        
             // if(empty($sporttb->category)){
             //     $sporttb->category_msg = "Field is empty.";$noerror=false;
@@ -56,64 +55,29 @@
             return $noerror;
         }
         // add new record
-		public function insert($_user)
+		public function insert($_newUserRole)
 		{
             try{
-                $user = new users();
-                // if (isset($_POST['addbtn'])) 
-                // {   
+                $userrole=new userroles(); 
                 // read form value
-                $user->name = trim($_user->name);
-                $user->email = trim($_user->email);
-                $user->password = trim($_user->password);
-                $user->contact = trim($_user->contact);
-                $user->city = trim($_user->city);
-                $user->address = trim($_user->address);
-                $user->id = $_user->id;
+                $userrole->id = $_newUserRole->id;
+                $userrole->userId = $_newUserRole->userId;
+                $userrole->roleId = $_newUserRole->roleId;
                 //call validation
-                $chk=$this->checkValidation($user);                    
+                $chk=$this->checkValidation($userrole);                    
                 if($chk)
                 {   
                     //call insert record            
-                    $pid = $this->objum->insertRecord($user);
-
-                    if($pid){			
-                        return $pid;
-                    }else{
-                        echo "Somthing is wrong..., try again.";
-                    }
-                }else
-                {    
-                    $_SESSION['usertbl0']=serialize($user);//add session obj           
-                    $this->pageRedirect("http://localhost/dashboard/www/assignment/login.php");                
+                    $pid = $this->objurm->insertRecord($userrole);
+                    return $pid;
                 }
-                //}
             }catch (Exception $e) 
             {
-                $this->objum->close_db();	
+                $this->objurm->close_db();	
                 throw $e;
             }
         }
 
-        public function insertAnUser($newuser)
-		{
-            try{
-                //call insert record            
-                $pid = $this->objum->insertRecord($newuser);
-                if($pid>0){			
-                    $this->list();
-                }else{
-                    echo "<script>console.log('can't insert')</script>";
-                }
-                        
-                $this->pageRedirect("http://localhost/dashboard/www/assignment/index.php");                
-
-            }catch (Exception $e) 
-            {
-                $this->objum->close_db();	
-                throw $e;
-            }
-        }
         // update record
         public function update()
 		{
@@ -122,19 +86,15 @@
                 
                 if (isset($_POST['updatebtn'])) 
                 {
-                    $user=unserialize($_SESSION['usertbl0']);
-                    $user->id = trim($_POST['id']);
-                    $user->name = trim($_POST['name']);                    
-                    $user->email = trim($_POST['email']);
-                    $user->city = trim($_POST['city']);
-                    $user->address = trim($_POST['address']);
-                    $user->password = trim($_POST['password']);
-                    $user->contact = trim($_POST['contact']);
+                    $userrole=unserialize($_SESSION['userrolestbl0']);
+                    $userrole->id = trim($_POST['id']);
+                    $userrole->userId = trim($_POST['userId']);
+                    $userrole->roleId = trim($_POST['roleId']);       
                     // check validation  
-                    $chk=$this->checkValidation($user);
+                    $chk=$this->checkValidation($userrole);
                     if($chk)
                     {
-                        $res = $this->objum->updateRecord($user);	                        
+                        $res = $this->objurm->updateRecord($userrole);	                        
                         if($res){			
                             $this->list();                           
                         }else{
@@ -142,22 +102,19 @@
                         }
                     }else
                     {         
-                        $_SESSION['usertbl0']=serialize($user);      
+                        $_SESSION['userrolestbl0']=serialize($userrole);      
                         $this->pageRedirect("http://localhost/dashboard/www/assignment/settings.php");                
                     }
                 }elseif(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                     $id=$_GET['id'];
-                    $result=$this->objum->selectRecord($id);
+                    $result=$this->objurm->selectRecord($id);
                     $row=mysqli_fetch_array($result);  
-                    $user=new users();                  
-                    $user->id = $row["id"];
-                    $user->name = $row["name"];
-                    $user->password = $row["password"];
-                    $user->email = $row["email"];
-                    $user->contact = $row["contact"];
-                    $user->city = $row["city"];
-                    $user->address = $row["address"];
-                    $_SESSION['usertbl0']=serialize($user);
+                    $userrole=new userroles();                  
+                    $userrole->id = $row["id"];
+                    $userrole->userId = $row["userId"];
+                    $userrole->roleId = $row["roleId"];
+                  
+                    $_SESSION['usertbl0']=serialize($userrole);
                     $this->pageRedirect('http://localhost/dashboard/www/assignment/settings.php');
                 }else{
                     echo "Invalid operation.";
@@ -165,7 +122,7 @@
             }
             catch (Exception $e) 
             {
-                $this->objum->close_db();				
+                $this->objurm->close_db();				
                 throw $e;
             }
         }
@@ -177,7 +134,7 @@
                 if (isset($_GET['id'])) 
                 {
                     $id=$_GET['id'];
-                    $res=$this->objum->deleteRecord($id);                
+                    $res=$this->objurm->deleteRecord($id);                
                     if($res){
                         $this->pageRedirect('http://localhost/dashboard/www/assignment/index.php');
                     }else{
@@ -189,22 +146,17 @@
             }
             catch (Exception $e) 
             {
-                $this->objum->close_db();				
+                $this->objurm->close_db();				
                 throw $e;
             }
         }
         public function list(){
-            $result=$this->objum->selectRecord(0);
+            $result=$this->objurm->selectRecord(0);
             include "http://localhost/dashboard/www/assignment/index.php";                                        
         }
 
         public function getMaxIndex(){
-            $result = $this->objum->getMaxIndex();
-            return $result;
-        }
-
-        public function checkInLogin($existedUser){
-            $result = $this->objum->checkInLogin($existedUser);
+            $result = $this->objurm->getMaxIndex();
             return $result;
         }
     }

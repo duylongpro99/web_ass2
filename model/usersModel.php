@@ -112,5 +112,46 @@ class usersModel{
         }
         
     }
+
+    public function getMaxIndex(){
+        try{
+            $this->open_db();
+            $query=$this->condb->prepare("SELECT MAX(id) AS maxId FROM users");
+            $query->execute();
+            $res=$query->get_result();
+            $rowData = mysqli_fetch_array($res);	
+            $query->close();				
+            $this->close_db();                
+            return $rowData['maxId'];
+        }
+        catch(Exception $e){
+            $this->close_db();
+            throw $e;
+        }
+    }
+
+    // select record     
+    public function checkInLogin($existedUser)
+    {
+        try
+        {
+            $this->open_db();
+            $query=$this->condb->prepare("call getUserByUserNameAndPassWord(?, ?)");
+            $query->bind_param("ss",$existedUser->email, $existedUser->password);
+            $query->execute();
+            $res = $query->get_result();
+            $rowData = mysqli_fetch_array($res);	
+            $query->close();				
+            $this->close_db();                
+            return $rowData;
+        }
+        catch(Exception $e)
+        {
+            $this->close_db();
+            throw $e; 	
+        }
+        
+    }
+
 }
 ?>

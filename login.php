@@ -16,7 +16,7 @@
 
              <form action="login_submit.php" method="POST">
                  <div class="form-group col-sm-10">
-                     <input type="email" class="form-control" name="e-mail" placeholder="Enter your Resistered E-Mail"
+                     <input type="e-mail" class="form-control" name="e-mail" placeholder="Enter your Resistered E-Mail"
                          required>
                  </div>
                  <div class="form-group col-sm-10" style="padding-bottom: 5px;">

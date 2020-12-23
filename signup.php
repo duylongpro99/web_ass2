@@ -53,7 +53,7 @@
                          style="margin-bottom: 20px;">Submit</button>
                  </div>
                  <div class="col-sm-10">
-                     Already have an account ?<a href="login.html"> Login</a>
+                     Already have an account ?<a href="login.php"> Login</a>
                  </div>
 
              </form>
