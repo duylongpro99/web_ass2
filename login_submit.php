@@ -11,8 +11,12 @@ $password = $_POST['password'];
 $checkUser  = new userObj(0, '', $password, '', $email,'' ,'' );
 $data = $userController->checkInLogin($checkUser);
 
-$loginResponse = new checkLoginResponse($data["userId"], $data["userName"], $data["roleName"], $data["roleId"], $data["password"], $data["email"]
-        , $data["contact"], $data["city"],$data["address"]);
-
-echo $loginResponse->userId;
+if($data != null){
+  $loginResponse = new checkLoginResponse($data["userId"], $data["userName"], $data["roleName"], $data["roleId"], $data["password"], $data["email"]
+          , $data["contact"], $data["city"],$data["address"]);
+  echo $loginResponse->roleName;
+}
+else{
+  echo "<script>alert('Login failed!!!')</script>";
+}
 ?>

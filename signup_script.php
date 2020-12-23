@@ -4,6 +4,7 @@
   session_unset();
   require_once './controller/userController.php';
   require_once './controller/userrolesController.php';
+  require_once './constant/url.php';
   require './common/userObj.php';
   require './common/userRolesObj.php';
   $userController = new usersController();
@@ -23,7 +24,12 @@
   if($doneUser > 0){
     $newUserRole = new userRolesObj($newUserRoleId, $doneUser, 3);
     $doneUserRole = $userroleController->insert($newUserRole);
+    if($doneUserRole > 0){
+      header($url.'login.php');
+    }
   }
+
+
 
 // Getting the values from the signup page using $_POST[] and cleaning the data submitted by the user.
 // $name = $_POST['name'];
