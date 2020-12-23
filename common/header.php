@@ -16,6 +16,7 @@
     </button>
     <?php
     if (!isset($_SESSION['email'])) {
+
     ?>
     <div class="collapse navbar-collapse justify-content-end navbar-right" id="collapsibleNavbar">
         <ul class="navbar-nav w-70">

@@ -24,9 +24,14 @@ if ($data != null) {
     $data["city"],
     $data["address"]
   );
-  $_SESSION['email'] = $email;
-  $_SESSION['roleName'] = $loginResponse->roleName;
-  header($url . 'index.php');
+  $_SESSION['email'] = strval($email);
+  $_SESSION['user_id'] = strval($loginResponse->userId);
+  $_SESSION['roleName'] = strval($loginResponse->roleName);
+  if ($loginResponse->roleName == 'admin') {
+    header($url . 'admin.php');
+  } else {
+    header($url . 'index.php');
+  }
 } else {
   echo "<script>alert('Login failed!!!')</script>";
 }

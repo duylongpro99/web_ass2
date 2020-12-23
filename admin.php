@@ -1,9 +1,7 @@
 <?php
-    session_start();
-    if(!isset($_SESSION['roleName']) ){
-        echo $_SESSION['roleName'];
-    }
-    else{
-        echo "YOu are not admin,";
-    }
-?>
+session_start();
+if (isset($_SESSION['roleName']) && $_SESSION['roleName'] == 'admin') {
+    echo "YOu are admin,";
+} else {
+    echo "YOu are not admin,";
+}
