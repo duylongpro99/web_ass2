@@ -16,17 +16,17 @@
                     $result = mysqli_query($con, $query) or die($mysqli_error($con));
                     if (mysqli_num_rows($result) >= 1) {
                     ?>
-                     <thead>
-                         <tr>
-                             <th>Item Number</th>
-                             <th>Item Name</th>
-                             <th>Price</th>
-                             <th></th>
-                         </tr>
-                     </thead>
+                 <thead>
+                     <tr>
+                         <th>Item Number</th>
+                         <th>Item Name</th>
+                         <th>Price</th>
+                         <th></th>
+                     </tr>
+                 </thead>
 
-                     <tbody>
-                         <?php
+                 <tbody>
+                     <?php
                             while ($row = mysqli_fetch_array($result)) {
                                 $sum += $row["Price"];
                                 $id = "";
@@ -35,7 +35,7 @@
                                               <td class=\"amount\">" . $row["id"] . "</td>
                                               <td>" . $row["Name"] . "</td>
                                               <td class=\"price\">VND " . $row["Price"] . "</td>
-                                              <td><a href='cart-remove.php?id={$row['id']}' class='remove_item_link'> X </a></td>
+                                              <td><a href='#' onclick ='myFunction({$row['id']});' class='remove_item_link'> X </a></td>
                                           </tr>";
                             }
                             $id = rtrim($id, ",");
@@ -46,14 +46,14 @@
                                           <td><a href='success.php?itemsid=" . $id . "'class='btn btn-primary'>Confirm Order</a></td>
                                           </tr>";
                             ?>
-                         <!-- <tr>
+                     <!-- <tr>
                          <td> </td>
                          <td></td>
                          <td class="total">Total</td>
                          <td class="confirm"><button type="button" onclick="pay()"
                                  class="btn btn-primary">Caculate</button></td>
                      </tr> -->
-                     </tbody>
+                 </tbody>
                  <?php
                     } else {
                         echo "<center><h2>Add items to the cart first!</h2></center>";
@@ -64,6 +64,26 @@
      </div>
  </div>
  </div>
+ <script>
+function deleteCartItem(itemId) {
+    $.get("./cart-remove.php", {
+        id: itemId
+    }, function(data) {
+        console.log(data);
+        if (data) {
+            location.reload();
+        }
+    });
+}
+
+function myFunction(x) {
+    var txt;
+    var r = confirm("Delete data cannot be recovered!");
+    if (r == true) {
+        deleteCartItem(x);
+    }
+}
+ </script>
  <script type="text/javascript" src="./js/cart.js"></script>
  <?php
     include('./common/footer.php');
