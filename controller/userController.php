@@ -207,6 +207,21 @@
             $result = $this->objum->checkInLogin($existedUser);
             return $result;
         }
+
+        public function getPermissionsOfUser($userId){
+            $result = $this->objum->getPermissionsOfUser($userId);
+            return $result;
+        }
+
+        public function getUsersForAdmin($adminId){
+            $accountList = $this->objum->getUsersForAdmin($adminId);
+            return $accountList;
+        }
+
+        public function deleteAccount($accountId){
+            $res = $this->objum->getUsersForAdmin($accountId);
+            return $res;
+        }   
     }
 		
 	

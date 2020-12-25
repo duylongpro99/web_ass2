@@ -13,5 +13,5 @@ class userroles{
         $roleId = $userId = $id = 0;
         $roleId_msg = $userId_msg = $id_msg = '';
     }
-} 
+}   
 ?>

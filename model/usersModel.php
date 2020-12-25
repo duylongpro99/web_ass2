@@ -1,4 +1,5 @@
 <?php
+require './model/response/accountResponse.php';
 class usersModel{
     function __construct($consetup)
     {
@@ -151,6 +152,80 @@ class usersModel{
             throw $e; 	
         }
         
+    }
+
+    public function getPermissionsOfUser($userId){
+        try{
+            $permissionList = array();
+            $this->open_db();
+            $query=$this->condb->prepare("call getPermissionsOfUser(?)");
+            $query->bind_param("i", $userId);
+            $query->execute();
+            $res = $query->get_result();
+            //$res = mysqli_query($query);
+            //$permissionList = mysqli_fetch_field($res);	
+            if (mysqli_num_rows($res) > 0) {
+                while ($row = mysqli_fetch_assoc($res)) {
+                    array_push($permissionList, $row['permissionList']);
+                }
+            }
+            $query->close();				
+            $this->close_db();                
+            return $permissionList;
+        }
+        catch(Exception $e)
+        {
+            $this->close_db();
+            throw $e; 	
+        }
+    }
+
+    public function getUsersForAdmin($adminId){
+        try{
+            $acountList = array();
+            $this->open_db();
+            $query=$this->condb->prepare("call GetAllUserExceptOwner(?)");
+            $query->bind_param("i", $adminId);
+            $query->execute();
+            $res = $query->get_result();
+            //$res = mysqli_query($query);
+            //$permissionList = mysqli_fetch_field($res);	
+            if (mysqli_num_rows($res) > 0) {
+                while ($row = mysqli_fetch_assoc($res)) {
+                    $account = new accountResponse($row['id'],$row['name'], $row['roleName'], $row['email'], $row['contact'], $row['city'], $row['address']);
+                    array_push($acountList, $account);
+                }
+            }
+            $query->close();				
+            $this->close_db();                
+            return $acountList;
+        }
+        catch(Exception $e)
+        {
+            $this->close_db();
+            throw $e; 	
+        }
+    }
+
+    public function deleteAccount($accountId){
+        try{
+            $this->open_db();
+            $query=$this->condb->prepare("call DeleteAccount(?)");
+            $query->bind_param("i", $accountId);
+            $query->execute();
+            $res = $query->get_result();
+            //$res = mysqli_query($query);
+            $rowData = mysqli_fetch_array($res);	
+            $done = $rowData['done'];
+            $query->close();				
+            $this->close_db();                
+            return $done;
+        }
+        catch(Exception $e)
+        {
+            $this->close_db();
+            throw $e; 	
+        }
     }
 
 }

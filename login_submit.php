@@ -24,10 +24,15 @@ if ($data != null) {
     $data["city"],
     $data["address"]
   );
+  $permissionList = $userController->getPermissionsOfUser($loginResponse->userId);
+  foreach ($permissionList as $value) {
+    $_SESSION[strval($value)] = strval($value);
+  }
   $_SESSION['email'] = strval($email);
   $_SESSION['user_id'] = strval($loginResponse->userId);
   $_SESSION['roleName'] = strval($loginResponse->roleName);
   if ($loginResponse->roleName == 'admin') {
+    setcookie('userId', $loginResponse->userId, time() + (86400), "/");
     header($url . 'admin.php');
   } else {
     header($url . 'index.php');
