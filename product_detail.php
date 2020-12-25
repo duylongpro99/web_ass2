@@ -25,7 +25,36 @@
         }
     }
 
+    //This code checks if the product is added to cart. 
+    function check_if_product_exist($item_id)
+    {
+        // require("./common/common.php"); // connecting to the database
+        // We will select all the entries from the user_items table where the item_id is equal to the item_id we passed to this function, user_id is equal to the user_id in the session and status is 'Added to cart'
+        require("./common/common.php"); // connecting to the database
+        $query = "SELECT * FROM items WHERE id='$item_id' ";
+        $result = mysqli_query($con, $query) or die(mysqli_error($con));
+
+        // We'll check if the no.of rows in the result and no.of rows returned by the mysqli_num_rows($result) is true. If yes then it return 0 else it returns 0
+        if (mysqli_num_rows($result) >= 1) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+    // $id = 0;
+    // $name = '';
+    // $picture = '';
+    // $price = 0;
+    function get_product($item_id)
+    {
+        require("./common/common.php");
+        $query = "SELECT `id`, `name`, `picture`, `price`, `category` FROM `items` WHERE id='$item_id'";
+        $ipresult = mysqli_query($con, $query) or die($mysqli_error($con));
+        return mysqli_fetch_array($ipresult);
+    }
+
     ?>
+
  <br>
  <br>
 
@@ -37,6 +66,7 @@
      </div>
      <hr>
      <br>
+     <?php if (isset($_GET['id']) && check_if_product_exist($_GET['id'])) { ?>
      <!--Section: Block Content-->
      <section class="mb-5">
 
@@ -51,9 +81,9 @@
 
                          <div class="col-12 mb-0">
                              <figure class="view overlay rounded z-depth-1 main-img">
-                                 <a href="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/15a.jpg"
+                                 <a href="<?php echo htmlspecialchars(get_product($_GET['id'])['picture']); ?>"
                                      data-size="710x823">
-                                     <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/15a.jpg"
+                                     <img src="<?php echo htmlspecialchars(get_product($_GET['id'])['picture']); ?>"
                                          class="img-fluid z-depth-1">
                                  </a>
                              </figure>
@@ -66,8 +96,10 @@
              </div>
              <div class="col-md-6">
 
-                 <h5>Fantasy T-shirt</h5>
-                 <p><span class="mr-1"><strong>$12.99</strong></span></p>
+                 <h5><?php echo htmlspecialchars(get_product($_GET['id'])['name']); ?></h5>
+                 <p><span
+                         class="mr-1"><strong>$<?php echo htmlspecialchars(get_product($_GET['id'])['price']); ?></strong></span>
+                 </p>
                  <p class="pt-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit
                      error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam. Distinctio,
                      officia quis dolore quos sapiente tempore alias.</p>
@@ -76,7 +108,7 @@
                          <tbody>
                              <tr>
                                  <th class="pl-0 w-25" scope="row"><strong>Category</strong></th>
-                                 <td>Shirt</td>
+                                 <td><?php echo htmlspecialchars(get_product($_GET['id'])['category']); ?></td>
                              </tr>
                              <tr>
                                  <th class="pl-0 w-25" scope="row"><strong>Delivery</strong></th>
@@ -86,8 +118,19 @@
                      </table>
                  </div>
                  <hr>
-                 <button type="button" class="btn btn-light btn-md mr-1 mb-2"><i
-                         class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
+
+                 <?php
+                        //We have created a function to check whether this particular product is added to cart or not.
+                        if (check_if_added_to_cart($_GET['id'])) { //This is same as if(check_if_added_to_cart != 0)
+                            echo '<a href="#" class="btn btn-block btn-secondary" disabled>Added to
+                                             cart</a>';
+                        } else {
+                        ?>
+                 <a href="cart-add.php?id=<?php echo htmlspecialchars($_GET['id']); ?>" name="add" value="add"
+                     class="btn btn-block btn-primary">Add to cart</a>
+                 <?php
+                        }
+                        ?>
              </div>
          </div>
 
@@ -131,6 +174,13 @@
 
  </div>
  <!-- Classic tabs -->
+ <?php } else {
+            echo "<div class=\"jumbotron home-spacer text-center\" id=\"products-jumbotron\">
+
+         <h1>Item does not exist!</h1>
+     </div>";
+        }
+    ?>
  </div>
  <?php
     include('./common/footer.php');
