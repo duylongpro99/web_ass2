@@ -214,12 +214,10 @@ class usersModel{
             $query->bind_param("i", $accountId);
             $query->execute();
             $res = $query->get_result();
-            //$res = mysqli_query($query);
             $rowData = mysqli_fetch_array($res);	
-            $done = $rowData['done'];
             $query->close();				
-            $this->close_db();                
-            return $done;
+            $this->close_db();     
+            return $rowData["done"] ;
         }
         catch(Exception $e)
         {

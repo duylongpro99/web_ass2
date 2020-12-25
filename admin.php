@@ -47,6 +47,7 @@ if(isset($_COOKIE['userId'])){
   <script>
       function deleteAccount(accountId){
         $.post("./deleteAccount.php",{userId: accountId},function(data){
+                console.log(data);
                 if(data){
                     location.reload();
                 }

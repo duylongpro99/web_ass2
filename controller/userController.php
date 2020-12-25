@@ -219,9 +219,9 @@
         }
 
         public function deleteAccount($accountId){
-            $res = $this->objum->getUsersForAdmin($accountId);
+            $res = $this->objum->deleteAccount($accountId);
             return $res;
-        }   
+        }       
     }
 		
 	

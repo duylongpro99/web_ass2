@@ -29,7 +29,7 @@
                      <button type="submit" name="submit" class="btn btn-primary" style="margin-bottom: 20px;">Log
                          In</button>
                  </div>
-                 <p class="col-sm-10">Not a member? <a href="./signup.html">Sign Up</a></p>
+                 <p class="col-sm-10">Not a member? <a href="./signup.php">Sign Up</a></p>
                  <p class="pull-left col-sm-10"><a href="#">Forgot Password?</a></p>
              </form>
          </div>
