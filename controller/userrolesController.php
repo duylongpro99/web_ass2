@@ -1,6 +1,6 @@
 <?php
     require_once 'model/userrolesModel.php';
-    require 'model/userroles.php';
+    require 'model/entity/userroles.php';
     require_once './config.php';
 
     session_status() === PHP_SESSION_ACTIVE ? TRUE : session_start();
