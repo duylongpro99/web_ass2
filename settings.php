@@ -8,8 +8,8 @@
  <div class="container-fluid">
      <br><br>
      <div class="row">
-         <div class="col-sm-4"></div>
-         <div class="col-sm-4" id="settings-container">
+         <div class="col-sm-3"></div>
+         <div class="col-sm-6" id="settings-container">
              <h4>Change Password</h4><br>
              <form action="settings_script.php" method="POST">
                  <div class="form-group">
@@ -35,7 +35,7 @@
 
              </form>
          </div>
-         <div class="col-sm-4"></div>
+         <div class="col-sm-3"></div>
      </div>
  </div>
  <?php
