@@ -14,7 +14,7 @@
         // require("./common/common.php"); // connecting to the database
         // We will select all the entries from the user_items table where the item_id is equal to the item_id we passed to this function, user_id is equal to the user_id in the session and status is 'Added to cart'
         require("./common/common.php"); // connecting to the database
-        $query = "SELECT * FROM users_items WHERE item_id='$item_id' AND user_id ='$user_id' and status='Added to cart'";
+        $query = "SELECT * FROM usersitems WHERE item_id='$item_id' AND user_id ='$user_id' and status='Added to cart'";
         $result = mysqli_query($con, $query) or die(mysqli_error($con));
 
         // We'll check if the no.of rows in the result and no.of rows returned by the mysqli_num_rows($result) is true. If yes then it return 0 else it returns 0
@@ -70,18 +70,17 @@
                                 $ipresult = mysqli_query($con, $query) or die($mysqli_error($con));
                                 if (mysqli_num_rows($ipresult) >= 1) {
                                     while ($row = mysqli_fetch_array($ipresult)) { ?>
-                             <div class="col mb-4 ">
-                                 <div class="card">
-                                     <img class="card-img-top" style="padding:10px"
-                                         src="<?php echo htmlspecialchars($row["picture"]); ?>" alt="macbook-air">
-                                     <div class="card-body">
-                                         <h2><?php echo htmlspecialchars($row["name"]); ?></h2>
-                                         <p>Price: <?php echo htmlspecialchars($row["price"]); ?> </p>
+                                     <div class="col mb-4 ">
+                                         <div class="card">
+                                             <img class="card-img-top" style="padding:10px" src="<?php echo htmlspecialchars($row["picture"]); ?>" alt="macbook-air">
+                                             <div class="card-body">
+                                                 <h2><?php echo htmlspecialchars($row["name"]); ?></h2>
+                                                 <p>Price: <?php echo htmlspecialchars($row["price"]); ?> </p>
 
-                                         <?php if (!isset($_SESSION['email'])) { ?>
-                                         <p><a href="login.php" role="button" class="btn btn-primary btn-block">Buy
-                                                 Now</a></p>
-                                         <?php
+                                                 <?php if (!isset($_SESSION['email'])) { ?>
+                                                     <p><a href="login.php" role="button" class="btn btn-primary btn-block">Buy
+                                                             Now</a></p>
+                                                     <?php
                                                     } else {
                                                         //We have created a function to check whether this particular product is added to cart or not.
                                                         if (check_if_added_to_cart($row["id"])) { //This is same as if(check_if_added_to_cart != 0)
@@ -89,15 +88,14 @@
                                              cart</a>';
                                                         } else {
                                                         ?>
-                                         <a href="cart-add.php?id=<?php echo htmlspecialchars($row["id"]); ?>"
-                                             name="add" value="add" class="btn btn-block btn-primary">Add to cart</a>
-                                         <?php
+                                                         <a href="cart-add.php?id=<?php echo htmlspecialchars($row["id"]); ?>" name="add" value="add" class="btn btn-block btn-primary">Add to cart</a>
+                                                 <?php
                                                         }
                                                     }
                                                     ?>
+                                             </div>
+                                         </div>
                                      </div>
-                                 </div>
-                             </div>
                              <?php }
                                 }
                                 ?>
@@ -120,18 +118,17 @@
                                 $ipresult = mysqli_query($con, $query) or die($mysqli_error($con));
                                 if (mysqli_num_rows($ipresult) >= 1) {
                                     while ($row = mysqli_fetch_array($ipresult)) { ?>
-                             <div class="col mb-4 ">
-                                 <div class="card">
-                                     <img class="card-img-top" style="padding:10px"
-                                         src="<?php echo htmlspecialchars($row["picture"]); ?>" alt="macbook-air">
-                                     <div class="card-body">
-                                         <h3><?php echo htmlspecialchars($row["name"]); ?></h3>
-                                         <p>Price: <?php echo htmlspecialchars($row["price"]); ?> </p>
+                                     <div class="col mb-4 ">
+                                         <div class="card">
+                                             <img class="card-img-top" style="padding:10px" src="<?php echo htmlspecialchars($row["picture"]); ?>" alt="macbook-air">
+                                             <div class="card-body">
+                                                 <h3><?php echo htmlspecialchars($row["name"]); ?></h3>
+                                                 <p>Price: <?php echo htmlspecialchars($row["price"]); ?> </p>
 
-                                         <?php if (!isset($_SESSION['email'])) { ?>
-                                         <p><a href="login.php" role="button" class="btn btn-primary btn-block">Buy
-                                                 Now</a></p>
-                                         <?php
+                                                 <?php if (!isset($_SESSION['email'])) { ?>
+                                                     <p><a href="login.php" role="button" class="btn btn-primary btn-block">Buy
+                                                             Now</a></p>
+                                                     <?php
                                                     } else {
                                                         //We have created a function to check whether this particular product is added to cart or not.
                                                         if (check_if_added_to_cart($row["id"])) { //This is same as if(check_if_added_to_cart != 0)
@@ -139,15 +136,14 @@
                                              cart</a>';
                                                         } else {
                                                         ?>
-                                         <a href="cart-add.php?id=<?php echo htmlspecialchars($row["id"]); ?>"
-                                             name="add" value="add" class="btn btn-block btn-primary">Add to cart</a>
-                                         <?php
+                                                         <a href="cart-add.php?id=<?php echo htmlspecialchars($row["id"]); ?>" name="add" value="add" class="btn btn-block btn-primary">Add to cart</a>
+                                                 <?php
                                                         }
                                                     }
                                                     ?>
+                                             </div>
+                                         </div>
                                      </div>
-                                 </div>
-                             </div>
                              <?php }
                                 }
                                 ?>
@@ -170,18 +166,17 @@
                                 $ipresult = mysqli_query($con, $query) or die($mysqli_error($con));
                                 if (mysqli_num_rows($ipresult) >= 1) {
                                     while ($row = mysqli_fetch_array($ipresult)) { ?>
-                             <div class="col mb-4 ">
-                                 <div class="card">
-                                     <img class="card-img-top" style="padding:10px"
-                                         src="<?php echo htmlspecialchars($row["picture"]); ?>" alt="macbook-air">
-                                     <div class="card-body">
-                                         <h2><?php echo htmlspecialchars($row["name"]); ?></h2>
-                                         <p>Price: <?php echo htmlspecialchars($row["price"]); ?> </p>
+                                     <div class="col mb-4 ">
+                                         <div class="card">
+                                             <img class="card-img-top" style="padding:10px" src="<?php echo htmlspecialchars($row["picture"]); ?>" alt="macbook-air">
+                                             <div class="card-body">
+                                                 <h2><?php echo htmlspecialchars($row["name"]); ?></h2>
+                                                 <p>Price: <?php echo htmlspecialchars($row["price"]); ?> </p>
 
-                                         <?php if (!isset($_SESSION['email'])) { ?>
-                                         <p><a href="login.php" role="button" class="btn btn-primary btn-block">Buy
-                                                 Now</a></p>
-                                         <?php
+                                                 <?php if (!isset($_SESSION['email'])) { ?>
+                                                     <p><a href="login.php" role="button" class="btn btn-primary btn-block">Buy
+                                                             Now</a></p>
+                                                     <?php
                                                     } else {
                                                         //We have created a function to check whether this particular product is added to cart or not.
                                                         if (check_if_added_to_cart($row["id"])) { //This is same as if(check_if_added_to_cart != 0)
@@ -189,15 +184,14 @@
                                              cart</a>';
                                                         } else {
                                                         ?>
-                                         <a href="cart-add.php?id=<?php echo htmlspecialchars($row["id"]); ?>"
-                                             name="add" value="add" class="btn btn-block btn-primary">Add to cart</a>
-                                         <?php
+                                                         <a href="cart-add.php?id=<?php echo htmlspecialchars($row["id"]); ?>" name="add" value="add" class="btn btn-block btn-primary">Add to cart</a>
+                                                 <?php
                                                         }
                                                     }
                                                     ?>
+                                             </div>
+                                         </div>
                                      </div>
-                                 </div>
-                             </div>
                              <?php }
                                 }
                                 ?>
@@ -220,18 +214,17 @@
                                 $ipresult = mysqli_query($con, $query) or die($mysqli_error($con));
                                 if (mysqli_num_rows($ipresult) >= 1) {
                                     while ($row = mysqli_fetch_array($ipresult)) { ?>
-                             <div class="col mb-4 ">
-                                 <div class="card">
-                                     <img class="card-img-top" style="padding:10px"
-                                         src="<?php echo htmlspecialchars($row["picture"]); ?>" alt="macbook-air">
-                                     <div class="card-body">
-                                         <h2><?php echo htmlspecialchars($row["name"]); ?></h2>
-                                         <p>Price: <?php echo htmlspecialchars($row["price"]); ?> </p>
+                                     <div class="col mb-4 ">
+                                         <div class="card">
+                                             <img class="card-img-top" style="padding:10px" src="<?php echo htmlspecialchars($row["picture"]); ?>" alt="macbook-air">
+                                             <div class="card-body">
+                                                 <h2><?php echo htmlspecialchars($row["name"]); ?></h2>
+                                                 <p>Price: <?php echo htmlspecialchars($row["price"]); ?> </p>
 
-                                         <?php if (!isset($_SESSION['email'])) { ?>
-                                         <p><a href="login.php" role="button" class="btn btn-primary btn-block">Buy
-                                                 Now</a></p>
-                                         <?php
+                                                 <?php if (!isset($_SESSION['email'])) { ?>
+                                                     <p><a href="login.php" role="button" class="btn btn-primary btn-block">Buy
+                                                             Now</a></p>
+                                                     <?php
                                                     } else {
                                                         //We have created a function to check whether this particular product is added to cart or not.
                                                         if (check_if_added_to_cart($row["id"])) { //This is same as if(check_if_added_to_cart != 0)
@@ -239,15 +232,14 @@
                                              cart</a>';
                                                         } else {
                                                         ?>
-                                         <a href="cart-add.php?id=<?php echo htmlspecialchars($row["id"]); ?>"
-                                             name="add" value="add" class="btn btn-block btn-primary">Add to cart</a>
-                                         <?php
+                                                         <a href="cart-add.php?id=<?php echo htmlspecialchars($row["id"]); ?>" name="add" value="add" class="btn btn-block btn-primary">Add to cart</a>
+                                                 <?php
                                                         }
                                                     }
                                                     ?>
+                                             </div>
+                                         </div>
                                      </div>
-                                 </div>
-                             </div>
                              <?php }
                                 }
                                 ?>

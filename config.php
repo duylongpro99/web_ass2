@@ -1,13 +1,12 @@
 <?php
 
-class config  
-{	
-	function __construct() {
+class config
+{
+	function __construct()
+	{
 		$this->host = "localhost";
-		$this->user  = "root";
-		$this->pass = "";
+		$this->user  = "xyz";
+		$this->pass = "9499";
 		$this->db = "assignment";
 	}
 }
-
-?>
