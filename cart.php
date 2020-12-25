@@ -6,7 +6,7 @@
     include('./common/header.php');
     ?>
  <!-- body -->
- <div class="container w-96 px-0" style=" max-width: 96vw; margin-left: 2%; margin-top: 40px;">
+ <div class="container w-96 px-0" style=" max-width: 94vw; margin-left: 2%; margin-top: 40px;">
      <div class="row">
          <div class="col-sm-12">
              <table class="table table-striped">
@@ -87,6 +87,6 @@
  </div>
  </div>
  <script type="text/javascript" src="./js/cart.js"></script>
- <?php
+<?php
     include('./common/footer.php');
-    ?>
+?>
