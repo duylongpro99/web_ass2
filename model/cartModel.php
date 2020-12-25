@@ -26,7 +26,7 @@ class cartsModel{
         $this->condb->close();
     }
     
-    public function getLisrCart($userId){
+    public function getListCart($userId){
         $cartList = array();
         $this->open_db();
         $query=$this->condb->prepare("SELECT items.price AS Price, items.id, items.name AS Name FROM usersitems JOIN items ON usersitems.item_id = items.id WHERE usersitems.user_id= ? and status='Added to cart'");
@@ -44,12 +44,42 @@ class cartsModel{
         return $cartList;
     }
 
-    public function cartAdd($userId, $itemId){
-        return 1;
+    public function cartAdd($itemId, $userId){
+        try{
+            $this->open_db();
+            $query=$this->condb->prepare("call AddCart(?, ?)");
+            $query->bind_param("ii", $itemId, $userId);
+            $query->execute();
+            $res = $query->get_result();
+            $rowData = mysqli_fetch_array($res);	
+            $query->close();				
+            $this->close_db();     
+            return $rowData["done"] ;
+        }
+        catch(Exception $e)
+        {
+            $this->close_db();
+            throw $e; 	
+        }
     }
 
-    public function cartRemove($userId, $itemId){
-        return 1;
+    public function cartRemove($itemId, $userId){
+        try{
+            $this->open_db();
+            $query=$this->condb->prepare("call RemoveCart(?, ?)");
+            $query->bind_param("ii", $itemId, $userId);
+            $query->execute();
+            $res = $query->get_result();
+            $rowData = mysqli_fetch_array($res);	
+            $query->close();				
+            $this->close_db();     
+            return $rowData["done"] ;
+        }
+        catch(Exception $e)
+        {
+            $this->close_db();
+            throw $e; 	
+        }
     }
 
 }

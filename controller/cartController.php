@@ -37,17 +37,17 @@
             return $noerror;
         }
         
-        public function getLisrCart($userId){
-            return $this-> objcm ->getLisrCart($userId);
+        public function getListCart($userId){
+            return $this-> objcm ->getListCart($userId);
         }
 
         // add new record
-		public function cartAdd($userId, $itemId){
-            return 1;
+		public function cartAdd($itemId, $userId){
+            return $this-> objcm ->cartAdd($itemId, $userId);
         }
 
-        public function removeCart($userId, $itemId){
-            return 1;
+        public function removeCart($itemId, $userId){
+            return $this-> objcm ->cartRemove($itemId, $userId);
         }
     }
 		

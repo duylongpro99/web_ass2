@@ -2,7 +2,6 @@
  <?php
     require './controller/cartController.php';
     $cartController = new cartController();
-    include('./common/common.php');
     include('./common/intro.php');
     include('./common/header.php');
     ?>
@@ -14,7 +13,7 @@
                     <?php
                         $sum = 0;
                         $userId = $_SESSION['user_id'];
-                        $listCart = $cartController -> getLisrCart($userId);
+                        $listCart = $cartController -> getListCart($userId);
                         // $query = "SELECT items.price AS Price, items.id, items.name AS Name FROM usersitems JOIN items ON usersitems.item_id = items.id WHERE usersitems.user_id='$user_id' and status='Added to cart'";
                         // $result = mysqli_query($con, $query) or die($mysqli_error($con));
                         // if (mysqli_num_rows($result) >= 1) {
