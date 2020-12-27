@@ -42,28 +42,7 @@ if (isset($_COOKIE['userId'])) {
     }
     ?>
     </tbody>
-    <?php
-  ?>
-    <script>
-    function deleteAccount(accountId) {
-        $.post("./deleteAccount.php", {
-            userId: accountId
-        }, function(data) {
-            console.log(data);
-            if (data) {
-                location.reload();
-            }
-        });
-    }
-
-    function myFunction(x) {
-        var txt;
-        var r = confirm("Delete data cannot be recovered!");
-        if (r == true) {
-            deleteAccount(x);
-        }
-    }
-    </script>
+    <script src="./js/deleteAcoount.js"></script>
 </table>
 <?php
 include('./common/footer.php');

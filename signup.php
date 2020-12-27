@@ -13,11 +13,11 @@
  <!-- body -->
  <div class="container" style="padding-top: 40px;">
      <div class="row">
-         <div class="col-sm-5">
+         <div class="col col-sm-6 col-md-5">
              <img src="./img/samsung-galaxy-s20-ultra6.jpg" alt="...">
          </div>
 
-         <div class="col col-md-7 col-sm-7">
+         <div class="col col-md-7 col-sm-6">
              <h2 style="color:orange; margin-left: 20px; margin-bottom: 20px;">SIGN UP</h2>
              <form action="signup_script.php" method="POST">
 

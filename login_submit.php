@@ -8,7 +8,7 @@ $userController = new usersController();
 // require("./common/common.php");
 
 $email = $_POST['e-mail'];
-$password = $_POST['password'];
+$password =  $_POST['password'];
 $checkUser  = new userObj(0, '', $password, '', $email, '', '');
 $data = $userController->checkInLogin($checkUser);
 
@@ -38,5 +38,5 @@ if ($data != null) {
     header($url . 'index.php');
   }
 } else {
-  echo "<script>alert('Login failed!!!')</script>";
+  header($url . 'login.php');
 }
