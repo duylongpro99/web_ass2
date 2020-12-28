@@ -60,7 +60,8 @@
                          <tbody>
                              <tr>
                                  <th class="pl-0 w-25" scope="row"><strong>Category</strong></th>
-                                 <td><?php echo htmlspecialchars($productController->get_product($_GET['id'])->category); ?></td>
+                                 <td><?php echo htmlspecialchars($productController->get_product($_GET['id'])->category); ?>
+                                 </td>
                              </tr>
                              <tr>
                                  <th class="pl-0 w-25" scope="row"><strong>Delivery</strong></th>
@@ -73,13 +74,17 @@
 
                  <?php
                         //We have created a function to check whether this particular product is added to cart or not.
-                        if ($productController->check_if_added_to_cart($_GET['id'], $_SESSION['user_id'])) { //This is same as if(check_if_added_to_cart != 0)
+                        if (isset($_SESSION['user_id']) && $productController->check_if_added_to_cart($_GET['id'], $_SESSION['user_id'])) { //This is same as if(check_if_added_to_cart != 0)
                             echo '<a href="#" class="btn btn-block btn-secondary" disabled>Added to
                                              cart</a>';
-                        } else {
+                        } elseif (isset($_SESSION['user_id'])) {
                         ?>
                  <a href="cart-add.php?id=<?php echo htmlspecialchars($_GET['id']); ?>" name="add" value="add"
                      class="btn btn-block btn-primary">Add to cart</a>
+                 <?php
+                        } else {
+                        ?>
+                 <a href="login.php" name="add" value="add" class="btn btn-block btn-primary">Buy now</a>
                  <?php
                         }
                         ?>
@@ -97,7 +102,7 @@
                     if (count($results) > 0) { ?>
              <h5><span> </span> Reviews for
                  <span><?php echo htmlspecialchars($productController->get_product($_GET['id'])->name); ?></span></h5>
-             <?php foreach($results as $comment) { ?>
+             <?php foreach ($results as $comment) { ?>
              <div class="media mt-3 mb-4">
                  <!-- <img class="d-flex mr-3 z-depth-1" src="https://mdbootstrap.com/img/Photos/Others/placeholder1.jpg"
                      width="62" alt="Generic placeholder image"> -->
@@ -117,6 +122,7 @@
              <h5><span>0</span> Reviews for
                  <span><?php echo htmlspecialchars($productController->get_product($_GET['id'])->name); ?></span></h5>
              <?php } ?>
+             <?php if (isset($_SESSION['user_id'])) { ?>
              <h5 class="mt-4">Add a review</h5>
 
              <div>
@@ -130,7 +136,10 @@
                          class="btn btn-primary">Add a review</button>
                  </div>
              </div>
+             <?php } ?>
+
          </div>
+
      </div>
 
  </div>
@@ -142,6 +151,7 @@
      </div>";
         }
     ?>
+ <br>
  <script src="./js/addComment.js">
  </script>
  </div>
