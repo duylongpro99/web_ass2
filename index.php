@@ -90,6 +90,8 @@ include('./common/header.php');
     </div>
 </div>
 <!-- Footer -->
+<div class="footer-index">
 <?php
 include('./common/footer.php');
 ?>
+</div>

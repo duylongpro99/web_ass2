@@ -6,11 +6,11 @@
  <!-- body -->
  <div class="container" style="padding-top: 40px;">
      <div class="row">
-         <div class="col-sm-7">
+         <div class="col-sm-5">
              <img src="./img/samsung-galaxy-s20-ultra6.jpg" alt="...">
          </div>
 
-         <div class="col-sm-5">
+         <div class="col-sm-7">
 
              <h2 style="color:orange; margin-left: 20px; margin-bottom: 20px;">LOG IN</h2>
 

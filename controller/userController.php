@@ -1,7 +1,7 @@
 <?php
     require 'model/usersModel.php';
     require 'model/entity/users.php';
-    require_once './config.php';
+    require_once './constant/config.php';
 
     session_status() === PHP_SESSION_ACTIVE ? TRUE : session_start();
     

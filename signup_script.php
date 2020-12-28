@@ -12,7 +12,7 @@
 
   $newName = $_POST['name'];
   $newemail = $_POST['email'];
-  $newPassword = $_POST['password'];
+  $newPassword = strval($_POST['password']);
   $newContact = $_POST['contact'];
   $newCity = $_POST['city'];
   $newAddress = $_POST['address'];
