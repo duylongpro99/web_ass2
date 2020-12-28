@@ -177,7 +177,7 @@ class usersModel{
         {
             $this->close_db();
             throw $e; 	
-        }
+        }   
     }
 
     public function getUsersForAdmin($adminId){

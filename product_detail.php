@@ -1,46 +1,10 @@
  <!-- Header -->
  <?php
-    include('./common/common.php');
+    require_once './controller/productController.php';
+    //include('./common/common.php');
     include('./common/intro.php');
     include('./common/header.php');
-    ?>
- <!-- body -->
- <?php
-
-    //This code checks if the product is added to cart. 
-    function check_if_added_to_cart($item_id)
-    {
-        $user_id = $_SESSION['user_id']; //We'll get the user_id from the session
-        // require("./common/common.php"); // connecting to the database
-        // We will select all the entries from the user_items table where the item_id is equal to the item_id we passed to this function, user_id is equal to the user_id in the session and status is 'Added to cart'
-        require("./common/common.php"); // connecting to the database
-        $query = "SELECT * FROM usersitems WHERE item_id='$item_id' AND user_id ='$user_id' and status='Added to cart'";
-        $result = mysqli_query($con, $query) or die(mysqli_error($con));
-
-        // We'll check if the no.of rows in the result and no.of rows returned by the mysqli_num_rows($result) is true. If yes then it return 0 else it returns 0
-        if (mysqli_num_rows($result) >= 1) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
-
-    //This code checks if the product is added to cart. 
-    function check_if_product_exist($item_id)
-    {
-        // require("./common/common.php"); // connecting to the database
-        // We will select all the entries from the user_items table where the item_id is equal to the item_id we passed to this function, user_id is equal to the user_id in the session and status is 'Added to cart'
-        require("./common/common.php"); // connecting to the database
-        $query = "SELECT * FROM items WHERE id='$item_id' ";
-        $result = mysqli_query($con, $query) or die(mysqli_error($con));
-
-        // We'll check if the no.of rows in the result and no.of rows returned by the mysqli_num_rows($result) is true. If yes then it return 0 else it returns 0
-        if (mysqli_num_rows($result) >= 1) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
+    $productController =  new ProductController();
     // $id = 0;
     // $name = '';
     // $picture = '';
@@ -76,7 +40,7 @@
      </div>
      <hr>
      <br>
-     <?php if (isset($_GET['id']) && check_if_product_exist($_GET['id'])) { ?>
+     <?php if (isset($_GET['id']) && $productController->check_if_product_exist($_GET['id'])) { ?>
      <!--Section: Block Content-->
      <section class="mb-5">
 
@@ -131,7 +95,7 @@
 
                  <?php
                         //We have created a function to check whether this particular product is added to cart or not.
-                        if (check_if_added_to_cart($_GET['id'])) { //This is same as if(check_if_added_to_cart != 0)
+                        if ($productController->check_if_added_to_cart($_GET['id'], $_SESSION['user_id'])) { //This is same as if(check_if_added_to_cart != 0)
                             echo '<a href="#" class="btn btn-block btn-secondary" disabled>Added to
                                              cart</a>';
                         } else {
@@ -201,23 +165,23 @@
         }
     ?>
  <script>
-myFunc(x) {
-    $.ajax({
-        type: "POST",
-        url: 'comment-add.php',
-        data: {
-            id: x,
-            comment: 'abc 111111'
-        },
-        success: function(html) {
-            //For wait 5 seconds
-            setTimeout(function() {
-                location.reload(); //Refresh page
-            }, 500);
-        }
+    function myFunc(x){
+        $.ajax({
+            type: "POST",
+            url: 'comment-add.php',
+            data: {
+                id: x,
+                comment: 'abc 111111'
+            },
+            success: function(html) {
+                //For wait 5 seconds
+                setTimeout(function() {
+                    location.reload(); //Refresh page
+                }, 500);
+            }
 
-    });
-};
+        });
+    };
  </script>
  </div>
  <?php
