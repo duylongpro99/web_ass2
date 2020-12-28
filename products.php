@@ -5,7 +5,7 @@
     include('./common/header.php');
     require_once './controller/productController.php';
     $productController =  new ProductController();
-?>
+    ?>
  <!-- body -->
  <br>
  <br>
@@ -54,6 +54,7 @@
                                 if (count($ipresults) > 0) {
                                     foreach($ipresults as $ipresult) { ?>
                                      <div class="col mb-4 ">
+                                     <a href="./product_detail.php?id=<?php echo htmlspecialchars($ipresult->id); ?>">
                                          <div class="card">
                                             <?php if(isset($_SESSION['canRemoveItem'])) {
                                              echo "<button onclick='removeItem($ipresult->id)' class='btn btn-danger remove-item'>X</button>";
@@ -66,21 +67,25 @@
                                                  <?php if (!isset($_SESSION['email'])) { ?>
                                                      <p><a href="login.php" role="button" class="btn btn-primary btn-block">Buy
                                                              Now</a></p>
-                                                     <?php
-                                                    } else {
-                                                        //We have created a function to check whether this particular product is added to cart or not.
-                                                        if ($productController->check_if_added_to_cart($ipresult->id, $_SESSION['user_id'])) { //This is same as if(check_if_added_to_cart != 0)
-                                                            echo "<a href='cart-remove.php?id=$ipresult->id&shop=1' class='btn btn-block btn-secondary' disabled>Remove Cart</a>";
-                                                        } else {
+                                                        <?php
+                                                            } else {
+                                                                //We have created a function to check whether this particular product is added to cart or not.
+                                                                if ($productController->check_if_added_to_cart($ipresult->id, $_SESSION['user_id'])) { //This is same as if(check_if_added_to_cart != 0)
+                                                                    echo "<a href='cart-remove.php?id=$ipresult->id&shop=1' class='btn btn-block btn-secondary' disabled>Remove Cart</a>";
+                                                                } else {
                                                         ?>
-                                                         <a href="cart-add.php?id=<?php echo htmlspecialchars($ipresult->id); ?>" name="add" value="add" class="btn btn-block btn-primary">Add to cart</a>
-                                                 <?php
-                                                        }
-                                                    }
-                                                    ?>
-                                             </div>
+                                                                <a href="cart-add.php?id=<?php echo htmlspecialchars($ipresult->id); ?>"
+                                                                    name="add" value="add" class="btn btn-block btn-primary">Add to
+                                                                    cart</a>
+                                                                <?php
+                                                                    }
+                                                                }
+                                                                ?>
                                          </div>
                                      </div>
+                                 </a>
+                             </div>
+
                              <?php }
                                 }
                                 ?>
@@ -106,6 +111,7 @@
                                 if (count($macbooks) > 0) {
                                     foreach($macbooks as $macbook) { ?>
                                      <div class="col mb-4 ">
+                                     <a href="./product_detail.php?id=<?php echo htmlspecialchars($macbook->id); ?>">
                                          <div class="card">
                                          <?php if(isset($_SESSION['canRemoveItem'])) {
                                              echo "<button onclick='removeItem($macbook->id)' class='btn btn-danger remove-item'>X</button>";
@@ -119,20 +125,24 @@
                                                      <p><a href="login.php" role="button" class="btn btn-primary btn-block">Buy
                                                              Now</a></p>
                                                      <?php
-                                                    } else {
-                                                        //We have created a function to check whether this particular product is added to cart or not.
-                                                        if ($productController->check_if_added_to_cart($macbook->id, $_SESSION['user_id'])) { //This is same as if(check_if_added_to_cart != 0)
-                                                            echo "<a href='cart-remove.php?id=$macbook->id&shop=1' class='btn btn-block btn-secondary' disabled>Remove Cart</a>";
+                                                   
                                                         } else {
-                                                        ?>
-                                                         <a href="cart-add.php?id=<?php echo htmlspecialchars($macbook->id); ?>" name="add" value="add" class="btn btn-block btn-primary">Add to cart</a>
-                                                 <?php
+                                                            //We have created a function to check whether this particular product is added to cart or not.
+                                                            if ($productController->check_if_added_to_cart($macbook->id, $_SESSION['user_id'])) { //This is same as if(check_if_added_to_cart != 0)
+                                                                echo "<a href='cart-remove.php?id=$macbook->id&shop=1' class='btn btn-block btn-secondary' disabled>Remove Cart</a>";
+                                                            } else {
+                                                            ?>
+                                             <a href="cart-add.php?id=<?php echo htmlspecialchars($macbook->id); ?>"
+                                                 name="add" value="add" class="btn btn-block btn-primary">Add to
+                                                 cart</a>
+                                             <?php
+                                                            }
                                                         }
-                                                    }
-                                                    ?>
-                                             </div>
+                                                        ?>
                                          </div>
                                      </div>
+                                 </a>
+                             </div>
                              <?php }
                                 }
                                 ?>
@@ -158,6 +168,7 @@
                                 if (count($watchs) > 0) {
                                     foreach($watchs as $watch) {?>
                                      <div class="col mb-4 ">
+                                     <a href="./product_detail.php?id=<?php echo htmlspecialchars($watch->id); ?>">
                                          <div class="card">
                                          <?php if(isset($_SESSION['canRemoveItem'])) {
                                              echo "<button onclick='removeItem($watch->id)' class='btn btn-danger remove-item'>X</button>";
@@ -171,20 +182,24 @@
                                                      <p><a href="login.php" role="button" class="btn btn-primary btn-block">Buy
                                                              Now</a></p>
                                                      <?php
-                                                    } else {
-                                                        //We have created a function to check whether this particular product is added to cart or not.
-                                                        if ($productController->check_if_added_to_cart( $watch->id, $_SESSION['user_id'])) { //This is same as if(check_if_added_to_cart != 0)
-                                                            echo "<a href='cart-remove.php?id=$watch->id&shop=1' class='btn btn-block btn-secondary' disabled>Remove Cart</a>";
+                                                    
                                                         } else {
-                                                        ?>
-                                                         <a href="cart-add.php?id=<?php echo htmlspecialchars( $watch->id); ?>" name="add" value="add" class="btn btn-block btn-primary">Add to cart</a>
-                                                 <?php
+                                                            //We have created a function to check whether this particular product is added to cart or not.
+                                                            if ($productController->check_if_added_to_cart($watch->id, $_SESSION['user_id'])) { //This is same as if(check_if_added_to_cart != 0)
+                                                                echo "<a href='cart-remove.php?id=$watch->id&shop=1' class='btn btn-block btn-secondary' disabled>Remove Cart</a>";
+                                                            } else {
+                                                            ?>
+                                             <a href="cart-add.php?id=<?php echo htmlspecialchars($watch->id); ?>"
+                                                 name="add" value="add" class="btn btn-block btn-primary">Add to
+                                                 cart</a>
+                                             <?php
+                                                            }
                                                         }
-                                                    }
-                                                    ?>
-                                             </div>
+                                                        ?>
                                          </div>
                                      </div>
+                                 </a>
+                             </div>
                              <?php }
                                 }
                                 ?>
@@ -211,6 +226,7 @@
                                 if (count($macs) > 0) {
                                     foreach($macs as $mac) { ?>
                                      <div class="col mb-4 ">
+                                     <a href="./product_detail.php?id=<?php echo htmlspecialchars($mac->id); ?>">
                                          <div class="card">
                                          <?php if(isset($_SESSION['canRemoveItem'])) {
                                              echo "<button onclick='removeItem($mac->id)' class='btn btn-danger remove-item'>X</button>";
@@ -232,12 +248,13 @@
                                                         ?>
                                                          <a href="cart-add.php?id=<?php echo htmlspecialchars($mac->id); ?>" name="add" value="add" class="btn btn-block btn-primary">Add to cart</a>
                                                  <?php
+                                                       }
                                                         }
-                                                    }
-                                                    ?>
-                                             </div>
+                                                        ?>
                                          </div>
                                      </div>
+                                 </a>
+                             </div>
                              <?php }
                                 }
                                 ?>
