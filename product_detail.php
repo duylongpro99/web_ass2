@@ -122,7 +122,7 @@
              <div>
                  <!-- Your review -->
                  <div class="md-form md-outline">
-                     <textarea id="form76" class="md-textarea form-control pr-6" rows="4"></textarea>
+                     <textarea id="comment-text" class="md-textarea form-control pr-6" rows="4"></textarea>
                  </div>
                  <br />
                  <div class="text-right pb-2">
@@ -142,24 +142,7 @@
      </div>";
         }
     ?>
- <script>
-    function myFunc(x){
-        $.ajax({
-            type: "POST",
-            url: 'comment-add.php',
-            data: {
-                id: x,
-                comment: 'abc 111111'
-            },
-            success: function(html) {
-                //For wait 5 seconds
-                setTimeout(function() {
-                    location.reload(); //Refresh page
-                }, 500);
-            }
-
-        });
-    };
+ <script src="./js/addComment.js">
  </script>
  </div>
  <?php

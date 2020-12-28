@@ -114,5 +114,23 @@ class productsModel{
         }
     }
 
+    public function insert_comment($user_id, $item_id, $content){
+        try{
+            $this->open_db();
+            $query=$this->condb->prepare("INSERT INTO `comments`(`user_id`, `item_id`, `comment`) VALUES (?,?,?)");
+            $query->bind_param("iis",$user_id, $item_id, $content);
+            $query->execute();
+            $res = $query->get_result();
+            $query->close();				
+            $this->close_db(); 
+            return 1;    
+        }
+        catch(Exception $e)
+        {
+            $this->close_db();
+            throw $e; 	
+        }
+    }
+
 }
 ?>

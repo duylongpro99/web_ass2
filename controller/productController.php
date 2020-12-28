@@ -53,6 +53,10 @@
         public function get_comments($item_id){
             return $this-> objpm -> get_comments($item_id);
         }
+
+        public function insert_comment($user_id, $item_id, $content){
+            return  $this-> objpm -> insert_comment($user_id, $item_id, $content);
+        }
     }
 		
 	
