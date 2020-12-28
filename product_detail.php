@@ -53,6 +53,16 @@
         return mysqli_fetch_array($ipresult);
     }
 
+    function get_comments($item_id)
+    {
+        require("./common/common.php");
+        $query = "SELECT users.email, comments.comment, comments.time FROM comments JOIN users ON comments.user_id = users.id WHERE comments.item_id='$item_id'";
+        $ipresult = mysqli_query($con, $query) or die($mysqli_error($con));
+        return $ipresult;
+    }
+
+
+
     ?>
 
  <br>
@@ -141,22 +151,30 @@
 
 
          <div class="tab-pane fade show active" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-             <h5><span>1</span> review for <span>Fantasy T-shirt</span></h5>
+             <?php $results = get_comments($_GET['id']);
+                    if (mysqli_num_rows($results) >= 1) { ?>
+             <h5><span> </span> Reviews for
+                 <span><?php echo htmlspecialchars(get_product($_GET['id'])['name']); ?></span></h5>
+             <?php while ($row = mysqli_fetch_array($results)) { ?>
              <div class="media mt-3 mb-4">
                  <!-- <img class="d-flex mr-3 z-depth-1" src="https://mdbootstrap.com/img/Photos/Others/placeholder1.jpg"
                      width="62" alt="Generic placeholder image"> -->
                  <div class="media-body">
                      <div class="d-sm-flex justify-content-between">
                          <p class="mt-1 mb-2">
-                             <strong>Marthasteward@gmail.com</strong>
-                             <span>– </span><span>January 28, 2020</span>
+                             <strong><?php echo htmlspecialchars($row['email']); ?></strong>
+                             <span>– </span><span><?php echo htmlspecialchars($row['time']); ?></span>
                          </p>
 
                      </div>
-                     <p class="mb-0">Nice one, love it!</p>
+                     <p class="mb-0"><?php echo htmlspecialchars($row['comment']); ?></p>
                  </div>
-             </div>
+             </div><?php } ?>
              <hr>
+             <?php } else { ?>
+             <h5><span>0</span> Reviews for
+                 <span><?php echo htmlspecialchars(get_product($_GET['id'])['name']); ?></span></h5>
+             <?php } ?>
              <h5 class="mt-4">Add a review</h5>
 
              <div>
@@ -166,7 +184,8 @@
                  </div>
                  <br />
                  <div class="text-right pb-2">
-                     <button type="button" class="btn btn-primary">Add a review</button>
+                     <button type="button" onclick="myFunc(<?php echo htmlspecialchars($_GET['id']); ?>,)"
+                         class="btn btn-primary">Add a review</button>
                  </div>
              </div>
          </div>
@@ -181,6 +200,25 @@
      </div>";
         }
     ?>
+ <script>
+myFunc(x) {
+    $.ajax({
+        type: "POST",
+        url: 'comment-add.php',
+        data: {
+            id: x,
+            comment: 'abc 111111'
+        },
+        success: function(html) {
+            //For wait 5 seconds
+            setTimeout(function() {
+                location.reload(); //Refresh page
+            }, 500);
+        }
+
+    });
+};
+ </script>
  </div>
  <?php
     include('./common/footer.php');
