@@ -195,6 +195,11 @@ class usersModel{
                     $account = new accountResponse($row['id'],$row['name'], $row['roleName'], $row['email'], $row['contact'], $row['city'], $row['address']);
                     array_push($acountList, $account);
                 }
+            }if (mysqli_num_rows($res) > 0) {
+                while ($row = mysqli_fetch_assoc($res)) {
+                    $account = new accountResponse($row['id'],$row['name'], $row['roleName'], $row['email'], $row['contact'], $row['city'], $row['address']);
+                    array_push($acountList, $account);
+                }
             }
             $query->close();				
             $this->close_db();                

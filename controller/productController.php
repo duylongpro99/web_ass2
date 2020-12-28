@@ -47,11 +47,11 @@
         }
 
         public function get_product($item_id){
-
+            return $this-> objpm -> get_product($item_id);  
         }
 
         public function get_comments($item_id){
-
+            return $this-> objpm -> get_comments($item_id);
         }
     }
 		

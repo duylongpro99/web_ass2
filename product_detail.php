@@ -5,28 +5,6 @@
     include('./common/intro.php');
     include('./common/header.php');
     $productController =  new ProductController();
-    // $id = 0;
-    // $name = '';
-    // $picture = '';
-    // $price = 0;
-    function get_product($item_id)
-    {
-        require("./common/common.php");
-        $query = "SELECT `id`, `name`, `picture`, `price`, `category` FROM `items` WHERE id='$item_id'";
-        $ipresult = mysqli_query($con, $query) or die($mysqli_error($con));
-        return mysqli_fetch_array($ipresult);
-    }
-
-    function get_comments($item_id)
-    {
-        require("./common/common.php");
-        $query = "SELECT users.email, comments.comment, comments.time FROM comments JOIN users ON comments.user_id = users.id WHERE comments.item_id='$item_id'";
-        $ipresult = mysqli_query($con, $query) or die($mysqli_error($con));
-        return $ipresult;
-    }
-
-
-
     ?>
 
  <br>
@@ -55,9 +33,9 @@
 
                          <div class="col-12 mb-0">
                              <figure class="view overlay rounded z-depth-1 main-img">
-                                 <a href="<?php echo htmlspecialchars(get_product($_GET['id'])['picture']); ?>"
+                                 <a href="<?php echo htmlspecialchars($productController->get_product($_GET['id'])->picture); ?>"
                                      data-size="710x823">
-                                     <img src="<?php echo htmlspecialchars(get_product($_GET['id'])['picture']); ?>"
+                                     <img src="<?php echo htmlspecialchars($productController->get_product($_GET['id'])->picture); ?>"
                                          class="img-fluid z-depth-1">
                                  </a>
                              </figure>
@@ -70,9 +48,9 @@
              </div>
              <div class="col-md-6">
 
-                 <h5><?php echo htmlspecialchars(get_product($_GET['id'])['name']); ?></h5>
+                 <h5><?php echo htmlspecialchars($productController->get_product($_GET['id'])->name); ?></h5>
                  <p><span
-                         class="mr-1"><strong>$<?php echo htmlspecialchars(get_product($_GET['id'])['price']); ?></strong></span>
+                         class="mr-1"><strong>$<?php echo htmlspecialchars($productController->get_product($_GET['id'])->price); ?></strong></span>
                  </p>
                  <p class="pt-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit
                      error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam. Distinctio,
@@ -82,7 +60,7 @@
                          <tbody>
                              <tr>
                                  <th class="pl-0 w-25" scope="row"><strong>Category</strong></th>
-                                 <td><?php echo htmlspecialchars(get_product($_GET['id'])['category']); ?></td>
+                                 <td><?php echo htmlspecialchars($productController->get_product($_GET['id'])->category); ?></td>
                              </tr>
                              <tr>
                                  <th class="pl-0 w-25" scope="row"><strong>Delivery</strong></th>
@@ -115,29 +93,29 @@
 
 
          <div class="tab-pane fade show active" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-             <?php $results = get_comments($_GET['id']);
-                    if (mysqli_num_rows($results) >= 1) { ?>
+             <?php $results = $productController->get_comments($_GET['id']);
+                    if (count($results) > 0) { ?>
              <h5><span> </span> Reviews for
-                 <span><?php echo htmlspecialchars(get_product($_GET['id'])['name']); ?></span></h5>
-             <?php while ($row = mysqli_fetch_array($results)) { ?>
+                 <span><?php echo htmlspecialchars($productController->get_product($_GET['id'])->name); ?></span></h5>
+             <?php foreach($results as $comment) { ?>
              <div class="media mt-3 mb-4">
                  <!-- <img class="d-flex mr-3 z-depth-1" src="https://mdbootstrap.com/img/Photos/Others/placeholder1.jpg"
                      width="62" alt="Generic placeholder image"> -->
                  <div class="media-body">
                      <div class="d-sm-flex justify-content-between">
                          <p class="mt-1 mb-2">
-                             <strong><?php echo htmlspecialchars($row['email']); ?></strong>
-                             <span>– </span><span><?php echo htmlspecialchars($row['time']); ?></span>
+                             <strong><?php echo htmlspecialchars($comment->email); ?></strong>
+                             <span>– </span><span><?php echo htmlspecialchars($comment->time); ?></span>
                          </p>
 
                      </div>
-                     <p class="mb-0"><?php echo htmlspecialchars($row['comment']); ?></p>
+                     <p class="mb-0"><?php echo htmlspecialchars($comment->comment); ?></p>
                  </div>
              </div><?php } ?>
              <hr>
              <?php } else { ?>
              <h5><span>0</span> Reviews for
-                 <span><?php echo htmlspecialchars(get_product($_GET['id'])['name']); ?></span></h5>
+                 <span><?php echo htmlspecialchars($productController->get_product($_GET['id'])->name); ?></span></h5>
              <?php } ?>
              <h5 class="mt-4">Add a review</h5>
 
