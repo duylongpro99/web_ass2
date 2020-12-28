@@ -41,19 +41,23 @@
                  <div class="card w-100">
                      <div class="card-header color">
                          <h3 id="iphone" style="color:orange">Iphone</h3>
+                         <?php if(isset($_SESSION['canAddItem'])) {?>
+                            <button  type="button" data-toggle="modal" data-target="#addItem" class="btn btn-success add-item">Add</button>
+                        <?php } ?>
                      </div>
 
                      <div class="card-body">
                          <div class="row row-cols-1 row-cols-md-3">
 
                              <?php
-                                // $query = "SELECT `id`, `name`, `picture`, `price` FROM `items` WHERE category='iphone'";
-                                // $ipresult = mysqli_query($con, $query) or die($mysqli_error($con));
                                 $ipresults = $productController->getProductByCategory('iphone');
                                 if (count($ipresults) > 0) {
                                     foreach($ipresults as $ipresult) { ?>
                                      <div class="col mb-4 ">
                                          <div class="card">
+                                            <?php if(isset($_SESSION['canRemoveItem'])) {
+                                             echo "<button onclick='removeItem($ipresult->id)' class='btn btn-danger remove-item'>X</button>";
+                                              } ?>
                                              <img class="card-img-top" style="padding:10px" src="<?php echo htmlspecialchars($ipresult->picture); ?>" alt="macbook-air">
                                              <div class="card-body">
                                                  <h2><?php echo htmlspecialchars($ipresult->name); ?></h2>
@@ -91,6 +95,9 @@
                      <div class="card-header color">
                          <h3 id="macbook" style="color:orange">Macbook</h3>
                      </div>
+                     <?php if(isset($_SESSION['canAddItem'])) {?>
+                        <button  type="button" data-toggle="modal" data-target="#addItem" class="btn btn-success add-item">Add</button>
+                    <?php } ?>
 
                      <div class="card-body">
                          <div class="row row-cols-1 row-cols-md-3">
@@ -100,6 +107,9 @@
                                     foreach($macbooks as $macbook) { ?>
                                      <div class="col mb-4 ">
                                          <div class="card">
+                                         <?php if(isset($_SESSION['canRemoveItem'])) {
+                                             echo "<button onclick='removeItem($macbook->id)' class='btn btn-danger remove-item'>X</button>";
+                                              } ?>
                                              <img class="card-img-top" style="padding:10px" src="<?php echo htmlspecialchars($macbook->picture); ?>" alt="macbook-air">
                                              <div class="card-body">
                                                  <h3><?php echo htmlspecialchars($macbook->name); ?></h3>
@@ -136,7 +146,10 @@
                  <div class="card w-100">
                      <div class="card-header color">
                          <h3 id="watch" style="color:orange">Apple Watch</h3>
-                     </div>
+                         <?php if(isset($_SESSION['canAddItem'])) {?>
+                            <button  type="button" data-toggle="modal" data-target="#addItem" class="btn btn-success add-item">Add</button>
+                        <?php } ?>
+                        </div>
 
                      <div class="card-body">
                          <div class="row row-cols-1 row-cols-md-3">
@@ -146,6 +159,9 @@
                                     foreach($watchs as $watch) {?>
                                      <div class="col mb-4 ">
                                          <div class="card">
+                                         <?php if(isset($_SESSION['canRemoveItem'])) {
+                                             echo "<button onclick='removeItem($watch->id)' class='btn btn-danger remove-item'>X</button>";
+                                              } ?>
                                              <img class="card-img-top" style="padding:10px" src="<?php echo htmlspecialchars( $watch->picture); ?>" alt="macbook-air">
                                              <div class="card-body">
                                                  <h2><?php echo htmlspecialchars( $watch->name); ?></h2>
@@ -182,6 +198,10 @@
                  <div class="card w-100">
                      <div class="card-header color">
                          <h3 id="mac" style="color:orange">Mac</h3>
+                         <?php if(isset($_SESSION['canAddItem'])) {?>
+                            <button  type="button" data-toggle="modal" data-target="#addItem" class="btn btn-success add-item">Add</button>
+
+                            <?php } ?>
                      </div>
 
                      <div class="card-body">
@@ -192,7 +212,10 @@
                                     foreach($macs as $mac) { ?>
                                      <div class="col mb-4 ">
                                          <div class="card">
-                                             <img class="card-img-top" style="padding:10px" src="<?php echo htmlspecialchars($mac->picture); ?>" alt="mac">
+                                         <?php if(isset($_SESSION['canRemoveItem'])) {
+                                             echo "<button onclick='removeItem($mac->id)' class='btn btn-danger remove-item'>X</button>";
+                                              } ?>
+                                            <img class="card-img-top" style="padding:10px" src="<?php echo htmlspecialchars($mac->picture); ?>" alt="mac">
                                              <div class="card-body">
                                                  <h2><?php echo htmlspecialchars($mac->name); ?></h2>
                                                  <p>Price: <?php echo htmlspecialchars($mac->price); ?>$ </p>
@@ -226,6 +249,42 @@
          </div>
      </div>
  </div>
+ <!-- Modal -->
+<div class="modal fade" id="addItem" tabindex="-1" role="dialog" aria-labelledby="addItem" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addItem">Add Item</h5>
+        <?php if(isset($_SESSION['canAddItem'])) {?>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <?php } ?>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label for="category">Category</label>
+        <select class="form-control" id="category" value = "iphone">
+            <option value="iphone">Iphone</option>
+            <option value="macbook">Macbook</option>
+            <option value="watch">Watch</option>
+            <option value="mac">Mac</option>
+        </select>
+        <label for="item-name">Item Name</label>
+        <input type="text" class="form-control" id="item-name" placeholder="Item Name">
+        <label for="picture-link">Picture Link</label>
+        <input type="text" class="form-control" id="picture-link" placeholder="Picture Link">
+        <label for="item-price">Price</label>
+        <input type="number" class="form-control" id="item-price" placeholder="Price">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" onclick="addItem()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+ <script src="./js/handleItem.js"></script>
  <?php
     include('./common/footer.php');
     ?>
+

@@ -157,5 +157,63 @@ class productsModel{
         }
     }
 
+    public function getMaxIndexOfProduct(){
+        try{
+            $this->open_db();
+            $query=$this->condb->prepare("call getMaxIndexOfProduct()");
+            $query->execute();
+            $res = $query->get_result();
+            $rowData = mysqli_fetch_array($res);
+            $query->close();				
+            $this->close_db();     
+            return $rowData['maxId'];
+        }
+        catch(Exception $e)
+        {
+            $this->close_db();
+            throw $e; 	
+        }
+    }
+
+    public function addProduct($_id, $_name, $_picture, $_category, $_price){
+        try{
+            $this->open_db();
+            $query=$this->condb->prepare("call AddProduct(?,?,?,?,?)");
+            $query->bind_param("isssi",$_id, $_name, $_picture, $_category, $_price);
+            $query->execute();
+            $res = $query->get_result();
+            $rowData = mysqli_fetch_array($res);
+            $query->close();				
+            $this->close_db(); 
+            if($rowData['done']) return 1;
+            else return 0;    
+        }
+        catch(Exception $e)
+        {
+            $this->close_db();
+            throw $e; 	
+        }
+    }
+
+    public function removeProduct($itemId){
+        try{
+            $this->open_db();
+            $query=$this->condb->prepare("call removeItem(?)");
+            $query->bind_param("i",$itemId);
+            $query->execute();
+            $res = $query->get_result();
+            $rowData = mysqli_fetch_array($res);
+            $query->close();				
+            $this->close_db(); 
+            if($rowData['done']) return 1;
+            else return 0;    
+        }
+        catch(Exception $e)
+        {
+            $this->close_db();
+            throw $e; 	
+        }
+    }
+
 }
 ?>

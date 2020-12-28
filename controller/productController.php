@@ -61,6 +61,18 @@
         public function getProductByCategory($category){
             return $this-> objpm -> getProductByCategory($category);
         }
+
+        public function getMaxIndexOfProduct(){
+            return $this -> objpm -> getMaxIndexOfProduct();
+        }
+
+        public function addProduct($_id, $_name, $_picture, $_category, $_price){
+            return $this -> objpm -> addProduct($_id, $_name, $_picture, $_category, $_price);
+        }
+
+        public function  removeProduct($itemId){
+            return $this -> objpm -> removeProduct($itemId);
+        }
     }
 		
 	
