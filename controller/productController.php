@@ -57,6 +57,10 @@
         public function insert_comment($user_id, $item_id, $content){
             return  $this-> objpm -> insert_comment($user_id, $item_id, $content);
         }
+
+        public function getProductByCategory($category){
+            return $this-> objpm -> getProductByCategory($category);
+        }
     }
 		
 	

@@ -132,5 +132,30 @@ class productsModel{
         }
     }
 
+    public function getProductByCategory($category){
+        try{
+            $items = array();
+            $this->open_db();
+            $query=$this->condb->prepare("SELECT `id`, `name`, `picture`, `price` FROM `items` WHERE category=?");
+            $query->bind_param("s", $category);
+            $query->execute();
+            $res = $query->get_result();
+            if (mysqli_num_rows($res) > 0) {
+                while ($rowData = mysqli_fetch_assoc($res)) {
+                    $item = new cartsResponse($rowData['id'], $rowData['name'], $rowData['picture'], $category, $rowData['price']) ;
+                    array_push($items, $item);
+                }
+            }
+            $query->close();				
+            $this->close_db();     
+            return $items;
+        }
+        catch(Exception $e)
+        {
+            $this->close_db();
+            throw $e; 	
+        }
+    }
+
 }
 ?>

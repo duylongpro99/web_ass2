@@ -6,11 +6,13 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $user_id = $_SESSION['user_id'];
 
     $result = $cartController->removeCart($item_id, $user_id);
-    if($result){
-        header('location: products.php');
-    }
-    else{
+    if(!$result){
         echo "<script>alert('Can't remove cart!!!')</script>";
     }
-    header("location:cart.php");
+    if($_GET['shop']){
+        header('location: products.php');
+    }else{
+
+        header("location:cart.php");
+    }
 }
