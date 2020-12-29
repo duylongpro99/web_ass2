@@ -55,9 +55,9 @@
                                     foreach($ipresults as $ipresult) { ?>
                                      <div class="col mb-4 ">
                                      <a href="./product_detail.php?id=<?php echo htmlspecialchars($ipresult->id); ?>">
-                                         <div class="card">
+                                         <div class="card item">
                                             <?php if(isset($_SESSION['canRemoveItem'])) {
-                                             echo "<button onclick='removeItem($ipresult->id)' class='btn btn-danger remove-item'>X</button>";
+                                             echo "<button onclick='removeItem($ipresult->id)' class='btn btn-secondary remove-item'>X</button>";
                                               } ?>
                                              <img class="card-img-top" style="padding:10px" src="<?php echo htmlspecialchars($ipresult->picture); ?>" alt="macbook-air">
                                              <div class="card-body">
@@ -112,9 +112,9 @@
                                     foreach($macbooks as $macbook) { ?>
                                      <div class="col mb-4 ">
                                      <a href="./product_detail.php?id=<?php echo htmlspecialchars($macbook->id); ?>">
-                                         <div class="card">
+                                         <div class="card item">
                                          <?php if(isset($_SESSION['canRemoveItem'])) {
-                                             echo "<button onclick='removeItem($macbook->id)' class='btn btn-danger remove-item'>X</button>";
+                                             echo "<button onclick='removeItem($macbook->id)' class='btn btn-secondary remove-item'>X</button>";
                                               } ?>
                                              <img class="card-img-top" style="padding:10px" src="<?php echo htmlspecialchars($macbook->picture); ?>" alt="macbook-air">
                                              <div class="card-body">
@@ -153,7 +153,7 @@
              </div>
 
              <div class="card-group" style="margin-bottom:50px">
-                 <div class="card w-100">
+                 <div class="card item w-100">
                      <div class="card-header color">
                          <h3 id="watch" style="color:orange">Apple Watch</h3>
                          <?php if(isset($_SESSION['canAddItem'])) {?>
@@ -169,9 +169,9 @@
                                     foreach($watchs as $watch) {?>
                                      <div class="col mb-4 ">
                                      <a href="./product_detail.php?id=<?php echo htmlspecialchars($watch->id); ?>">
-                                         <div class="card">
+                                         <div class="card item">
                                          <?php if(isset($_SESSION['canRemoveItem'])) {
-                                             echo "<button onclick='removeItem($watch->id)' class='btn btn-danger remove-item'>X</button>";
+                                             echo "<button onclick='removeItem($watch->id)' class='btn btn-secondary remove-item'>X</button>";
                                               } ?>
                                              <img class="card-img-top" style="padding:10px" src="<?php echo htmlspecialchars( $watch->picture); ?>" alt="macbook-air">
                                              <div class="card-body">
@@ -210,7 +210,7 @@
              </div>
 
              <div class="card-group" style="margin-bottom:50px">
-                 <div class="card w-100">
+                 <div class="card w-100 item">
                      <div class="card-header color">
                          <h3 id="mac" style="color:orange">Mac</h3>
                          <?php if(isset($_SESSION['canAddItem'])) {?>
@@ -229,7 +229,7 @@
                                      <a href="./product_detail.php?id=<?php echo htmlspecialchars($mac->id); ?>">
                                          <div class="card">
                                          <?php if(isset($_SESSION['canRemoveItem'])) {
-                                             echo "<button onclick='removeItem($mac->id)' class='btn btn-danger remove-item'>X</button>";
+                                             echo "<button onclick='removeItem($mac->id)' class='btn btn-secondary remove-item'>X</button>";
                                               } ?>
                                             <img class="card-img-top" style="padding:10px" src="<?php echo htmlspecialchars($mac->picture); ?>" alt="mac">
                                              <div class="card-body">
