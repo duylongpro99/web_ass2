@@ -71,7 +71,7 @@
                                                             } else {
                                                                 //We have created a function to check whether this particular product is added to cart or not.
                                                                 if ($productController->check_if_added_to_cart($ipresult->id, $_SESSION['user_id'])) { //This is same as if(check_if_added_to_cart != 0)
-                                                                    echo "<a href='cart-remove.php?id=$ipresult->id&shop=1' class='btn btn-block btn-secondary' disabled>Remove Cart</a>";
+                                                                    echo "<a href='cart-remove.php?id=$ipresult->id&shop=1' class='btn btn-block btn-secondary' disabled>Remove From Cart</a>";
                                                                 } else {
                                                         ?>
                                                                 <a href="cart-add.php?id=<?php echo htmlspecialchars($ipresult->id); ?>"
@@ -129,7 +129,7 @@
                                                         } else {
                                                             //We have created a function to check whether this particular product is added to cart or not.
                                                             if ($productController->check_if_added_to_cart($macbook->id, $_SESSION['user_id'])) { //This is same as if(check_if_added_to_cart != 0)
-                                                                echo "<a href='cart-remove.php?id=$macbook->id&shop=1' class='btn btn-block btn-secondary' disabled>Remove Cart</a>";
+                                                                echo "<a href='cart-remove.php?id=$macbook->id&shop=1' class='btn btn-block btn-secondary' disabled>Remove From Cart</a>";
                                                             } else {
                                                             ?>
                                              <a href="cart-add.php?id=<?php echo htmlspecialchars($macbook->id); ?>"
@@ -186,7 +186,7 @@
                                                         } else {
                                                             //We have created a function to check whether this particular product is added to cart or not.
                                                             if ($productController->check_if_added_to_cart($watch->id, $_SESSION['user_id'])) { //This is same as if(check_if_added_to_cart != 0)
-                                                                echo "<a href='cart-remove.php?id=$watch->id&shop=1' class='btn btn-block btn-secondary' disabled>Remove Cart</a>";
+                                                                echo "<a href='cart-remove.php?id=$watch->id&shop=1' class='btn btn-block btn-secondary' disabled>Remove From Cart</a>";
                                                             } else {
                                                             ?>
                                              <a href="cart-add.php?id=<?php echo htmlspecialchars($watch->id); ?>"
@@ -243,7 +243,7 @@
                                                     } else {
                                                         //We have created a function to check whether this particular product is added to cart or not.
                                                         if ($productController->check_if_added_to_cart($mac->id, $_SESSION['user_id'])) { //This is same as if(check_if_added_to_cart != 0)
-                                                            echo "<a href='cart-remove.php?id=$mac->id&shop=1' class='btn btn-block btn-secondary' disabled>Remove Cart</a>";
+                                                            echo "<a href='cart-remove.php?id=$mac->id&shop=1' class='btn btn-block btn-secondary' disabled>Remove From Cart</a>";
                                                        } else {
                                                         ?>
                                                          <a href="cart-add.php?id=<?php echo htmlspecialchars($mac->id); ?>" name="add" value="add" class="btn btn-block btn-primary">Add to cart</a>
