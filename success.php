@@ -11,7 +11,7 @@
 
              <h3 align="center">Your order is confirmed. Thank you for shopping with us.</h3>
              <hr>
-             <p align="center">Click <a href="products.html">here</a> to purchase any other item.</p>
+             <p align="center">Click <a href="products.php">here</a> to purchase any other item.</p>
          </div>
      </div>
  </div>
