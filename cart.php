@@ -55,7 +55,7 @@
                                 echo "<tr>
                                                 <td class=\"amount\">" . $cart->id . "</td>
                                                 <td>" . $cart->name . "</td>
-                                                <td class=\"price\">VND " . $cart->price . "</td>
+                                                <td class=\"price\">$ " . $cart->price . "</td>
                                                 <td><a href='cart-remove.php?id=$cart->id' class='remove_item_link'> X </a></td>
                                             </tr>";
                             }
@@ -63,7 +63,7 @@
                             echo "<tr>
                                         <td></td>
                                         <td>Total</td>
-                                        <td>VND " . $sum . "</td>
+                                        <td>$ " . $sum . "</td>
                                         <td><a href='success.php?itemsid=" . $id . "'class='btn btn-primary'>Confirm Order</a></td>
                                         </tr>";
                             ?>
