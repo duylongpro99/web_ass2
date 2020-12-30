@@ -145,7 +145,9 @@
                         </svg>
                     </span> Cart</a>
             </li>
-
+            <?php
+                if (isset($_SESSION['canSeeAdmin'])) {
+                ?>
             <li class="nav-item mr-2"><a class="nav-link" href="./adminnew.php">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -157,7 +159,9 @@
                         </svg>
                     </span> Orders</a>
             </li>
-
+                    <?php 
+                }
+                    ?>
             <li class="nav-item mr-2"><a class="nav-link" href="./settings.php">
                     <span>
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-gear" fill="currentColor"
